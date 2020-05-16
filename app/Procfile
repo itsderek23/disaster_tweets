@@ -1,1 +1,1 @@
-web: gunicorn app.main:app
+web: sh app/run_app_with_dvc.sh
