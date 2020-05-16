@@ -4,4 +4,7 @@ from disaster_tweets.models.model import Model
 
 def test_predict():
     model = Model()
-    model.predict([[1,2],[3,4]])
+    model.predict([
+        ["Theyd probably still show more life than Arsenal did yesterday, eh? EH?"],
+        ["Just happened a terrible car crash"]
+    ])
