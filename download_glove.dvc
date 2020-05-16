@@ -1,0 +1,11 @@
+md5: 15ff3bf04925ab93a15d345d94ba9f2b
+cmd: src/disaster_tweets/data/download_glove.sh
+deps:
+- md5: 33c89bf95c08af8936dfd6c88347ccd0
+  path: src/disaster_tweets/data/download_glove.sh
+outs:
+- md5: dd7f3ad906768166883176d69cc028de
+  path: data/raw/glove.6B.100d.txt
+  cache: true
+  metric: false
+  persist: false

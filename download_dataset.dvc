@@ -1,0 +1,21 @@
+md5: e3f822893b10f53e15fef74f91ea54a1
+cmd: src/disaster_tweets/data/download_dataset.sh
+deps:
+- md5: 9d46fef1141db14e0ede3c47d4d17162
+  path: src/disaster_tweets/data/download_dataset.sh
+outs:
+- md5: f147942c91d00d754503775341d13682
+  path: data/raw/train.csv
+  cache: true
+  metric: false
+  persist: false
+- md5: ff248529f207ea164d73636e5b1b251d
+  path: data/raw/test.csv
+  cache: true
+  metric: false
+  persist: false
+- md5: e07af9cfb75c09d368437c2c1c7900e9
+  path: data/raw/sample_submission.csv
+  cache: true
+  metric: false
+  persist: false
