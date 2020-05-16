@@ -1,0 +1,28 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-multi-procfile"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "description": "This is a whisk ML project using a Tensorflow-backed Keras model that predicts which tweets are about real disasters and which ones are not.",
+  "env": {
+    "PROCFILE": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "disaster_tweets",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
