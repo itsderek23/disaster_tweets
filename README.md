@@ -6,6 +6,26 @@ The project is structured with [whisk](https://github.com/whisk-ml/whisk), an ML
 
 Besides Tensorflow+Keras, the project uses DVC to version control the data download and training stages. As the training stage takes ~20 minutes on a laptop, this can save a significant amount of time when bootstrapping the project.
 
+## Using the trained model
+
+You can invoke the trained model without checking out the project source code. There are two options:
+
+### Deploy to Heroku as a web service
+
+Click the button below to deploy the Flask web service to Heroku. See [`app/README.md`](app/README.md) for the HTTP API.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/whisk-ml/disaster_tweets)
+
+
+
+### Install the Python Package
+
+Install this model via pip:
+
+        pip install git+https://github.com/itsderek23/disaster_tweets/
+
+See the [quickstart](#quickstart) section for usage info.
+
 ## Prerequisites
 
 The following is required to run this project:
