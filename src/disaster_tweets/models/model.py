@@ -1,33 +1,24 @@
 import whisk
+from tensorflow.keras.models import load_model
+import keras
+from keras.preprocessing.sequence import pad_sequences
 import pickle
 
+MAX_LEN=50
+
 class Model:
-    """
-    This class should be used to load and invoke the serialized model and any other required
-    model artifacts for pre/post-processing.
-    """
-
     def __init__(self):
-        """
-        Load the model + required pre-processing artifacts from disk. Loading from disk is slow,
-        so this is done in `__init__` rather than loading from disk on every call to `predict`.
+        self.model = load_model(whisk.artifacts_dir / "model.h5")
+        with open(whisk.artifacts_dir / 'tokenizer.pickle', 'rb') as handle:
+            self.tokenizer = pickle.load(handle)
 
-        Tensorflow example:
-
-            self.model = load_model(whisk.artifacts_dir / "model.h5")
-
-        Pickle example:
-
-            with open(whisk.artifacts_dir / 'tokenizer.pickle', 'rb') as file:
-                self.tokenizer = pickle.load(file)
-        """
-        # REPLACE ME - add your loading logic
-        with open(whisk.artifacts_dir / "model.pkl", 'rb') as file:
-            self.model = pickle.load(file)
-
-    def predict(self,data):
+    def predict(self,texts):
         """
         Returns model predictions.
         """
-        # Add any required pre/post-processing steps here.
-        return self.model.predict(data)
+        sequences = self.tokenizer.texts_to_sequences(texts)
+        processed_texts = pad_sequences(sequences,maxlen=MAX_LEN,truncating='post',padding='post')
+        result = self.model.predict(processed_texts)
+        # Calling `tolist()` so the Flask app just works.
+        # https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable
+        return result.tolist()
