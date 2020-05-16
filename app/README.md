@@ -7,7 +7,7 @@ This is an HTTP API skeleton to run model inference. The web app is powered by F
 From the project root:
 
 ```
-inv app.start
+whisk app start
 ```
 
 The app is available at http://localhost:5000/.
@@ -19,20 +19,14 @@ If the source code (``*.py` files) is updated, the app is reloaded automatically
 ```
 curl --location --request POST 'http://localhost:5000/predict' \
 --header 'Content-Type: application/json' \
---data-raw '{"data":[[0, 1], [2, 3]]}'
+--data-raw '{"data":["Just happened a terrible car crash"]}'
 ```
 
-```
-[
-  2,
-  2
-]
-```
 
 ## Creating an app on Heroku
 
 From the project root:
 
 ```
-inv app.create [HEROKU APP NAME]
+whisk app create [HEROKU APP NAME]
 ```
