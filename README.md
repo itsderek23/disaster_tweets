@@ -1,31 +1,58 @@
-# disaster_tweets
+# Real or Not? NLP with Disaster Tweets
 
-This readme was auto-generated using [whisk](https://github.com/whisk-ml/whisk). whisk creates a logical and flexible project structure for ML with reproducible results and lets you release your model to the world without becoming a software engineer.
+This is a Tensorflow-backed Keras model that predicts which tweets are about real disasters and which ones are not. It's derived from the popular [Basic EDA,Cleaning and GloVe Kaggle Notebook](https://www.kaggle.com/shahules/basic-eda-cleaning-and-glove).
 
-Once your project is setup, edit this readme directly to add context and documentation for your project.
+The project is structured with [whisk](https://github.com/whisk-ml/whisk), an ML project framework that make makes collaboration, reproducibility, and deployment "just work".
+
+Besides Tensorflow+Keras, the project uses DVC to version control the data download and training stages. As the training stage takes ~20 minutes on a laptop, this can save a significant amount of time when bootstrapping the project.
 
 ## Prerequisites
 
 The following is required to run this project:
 
-* Git (configured with a [user name and email](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup))
+* Git
 * Python 3.6+
-* A Linux-based OS (includes OSX)
+* A Linux-based OS
 
 ## Setup
 
-After cloning this repo and `cd disaster_tweets`:
+After cloning this repo and `cd disaster_tweets` run the following in your terminal:
 
-1. If you haven't yet installed whisk, run `pip install whisk`
-2. Run `whisk setup`. The install script creates a `venv`, installs the Python dependencies specified, and initializes DVC.
-3. Activate the venv: `source venv/bin/activate`
-4. If DVC is used, Download the latest data files: `dvc pull`.
+    pip install whisk
+    whisk setup
+    source venv/bin/activate
+    whisk dvc setup
+    dvc pull
+
+The commands above install whisk, setup the project environment, activate the created venv, setup dvc, and download data stored in DVC.
+
+## Quickstart
+
+After running setup, invoke the model from the command line:
+
+```
+disaster_tweets predict '["Theyd probably still show more life than Arsenal did yesterday, eh? EH?"]'
+[[0.19104013]]
+
+disaster_tweets predict '["Just happened a terrible car crash"]'
+[[0.658098]]
+```
+
+### DVC stages
+
+Run the training stage:
+
+    dvc repro train.dvc
+
+Run the download stages:
+
+    dvc repro download_dataset.dvc
+    dvc repro download_glove.dvc
+
+## Learn more about whisk
 
 To learn more about whisk, here are a few helpful doc pages:
+
 * [A Quick Tour of whisk](https://whisk.readthedocs.io/en/latest/tour_of_whisk.html)
 * [Key Concepts](https://whisk.readthedocs.io/en/latest/key_concepts.html)
 * [Project Structure](https://whisk.readthedocs.io/en/latest/project_structure.html)
-
---------
-
-<p><small>Project built with the <a target="_blank" href="https://github.com/whisk-ml/whisk">whisk ML project framework</a> based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
