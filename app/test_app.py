@@ -15,6 +15,11 @@ def test_predict(client):
     # The code below will likely fail when a real model
     # is provided. It should pass on a fresh app.
     response = client.post('/predict',
-                            data=json.dumps({"data": [[1]]}),
+                            data=json.dumps({"data":
+                                [
+                                    ["Theyd probably still show more life than Arsenal did yesterday, eh? EH?"],
+                                    ["Just happened a terrible car crash"]
+                                ]
+                            }),
                             content_type='application/json')
     assert response.status_code == 200
