@@ -30,3 +30,6 @@ pandas==1.0.3
 scikit_learn==0.22.2.post1
 seaborn==0.10.0
 tqdm==4.45.0
+
+# For Heroku
+setuptools>=41.0.0
