@@ -1,0 +1,20 @@
+md5: aacffec4b85f118a6cfccba4c17ddfc7
+cmd: python src/disaster_tweets/models/train.py
+deps:
+- md5: f147942c91d00d754503775341d13682
+  path: data/raw/train.csv
+- md5: dd7f3ad906768166883176d69cc028de
+  path: data/raw/glove.6B.100d.txt
+- md5: 7f8f23c22755b7ca2d0456daf046723d
+  path: src/disaster_tweets/models/train.py
+outs:
+- md5: 3ec9ea0cb38f0a4486e1b55c9e726ac1
+  path: src/disaster_tweets/artifacts/model.h5
+  cache: true
+  metric: false
+  persist: false
+- md5: 1929ad1bc99e69250a33b13c4ff22f01
+  path: src/disaster_tweets/artifacts/tokenizer.pickle
+  cache: true
+  metric: false
+  persist: false
