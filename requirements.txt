@@ -17,6 +17,7 @@ tox==3.15.0 # Testing the package in insolation and across Python versions
 twine==1.14.0 # Package distribution
 pytest==4.6.5 # Tests
 pytest-runner==5.1 # Tests
+nbconvert
 
 ### Add project-specific requirements below. ###
 tensorflow-cpu
