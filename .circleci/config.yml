@@ -1,0 +1,46 @@
+version: 2.1
+
+orbs:
+  # https://circleci.com/orbs/registry/orb/circleci/python
+  python: circleci/python@0.2.1
+
+jobs:
+  test:
+    docker:
+      - image: themattrix/tox
+    executor: python/default
+    steps:
+      - run: apt-get -y update
+      # In case build fails and need to SSH and edit files
+      - run: apt-get -y install nano
+      - checkout
+      - restore_cache:  # ensure this step occurs *before* installing dependencies
+          key: deps-0-{{ .Branch }}-{{ checksum "requirements.txt" }}-{{ checksum "setup.py" }}
+      - run: pip install "whisk==0.1.29"
+      - run: whisk setup
+      - run: echo "source /root/project/venv/bin/activate" >> $BASH_ENV
+      - run: whisk dvc setup
+      - run: dvc pull
+      - run:
+          command: pytest -s
+          name: Test Project
+      - run:
+          command: whisk notebook run notebooks/explore.ipynb
+          name: Test Notebook
+      - run:
+          # only python 3.7 is installed
+          command: tox
+          name: Test Package
+      - save_cache:
+          # Had trouble w/the full cache key reaching into the template dir
+          # key: deps-0-{{ .Branch }}-{{ checksum "requirements_dev.txt" }}-{{ checksum "setup.py" }}-{{ checksum "whisk/template/\{\{\ cookiecutter.repo_name\ \}\}/requirements.txt"}}
+          key: deps-0-{{ .Branch }}-{{ checksum "requirements.txt" }}-{{ checksum "setup.py" }}
+          paths:
+            - "venv"
+            - ".tox"
+            # The really slow part is tox installing the project dependencies but can't figure out how to cache this.
+
+workflows:
+  main:
+    jobs:
+      - test
