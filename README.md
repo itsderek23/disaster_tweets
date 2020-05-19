@@ -19,7 +19,7 @@ Click the button below to deploy the Flask web service to Heroku. See [`app/READ
 
 Install this model via pip:
 
-        pip install git+https://github.com/itsderek23/disaster_tweets/
+        pip install git+https://github.com/whisk-ml/disaster_tweets/
 
 See the [quickstart](#quickstart) section for usage info.
 
